@@ -13,8 +13,7 @@
   </head>
   <body>
     <p align="center">
-      <div class='sk-ww-facebook-live-video' data-embed-id='87553'></div><script src='https://widgets.sociablekit.com/facebook-live-video/widget.js' async defer></script>
-    </p>
+    <iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2F100083843887168%2Fvideos%2F375779884573268%2F&width=1280" width="1280" height="720" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe>    </p>
     <div class="container text-center">
       <div class="row">
         <div class="col border">

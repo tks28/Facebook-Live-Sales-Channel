@@ -45,13 +45,16 @@
 ?>
     </tbody>
 </table>
+<!doctype html>
+<html lang="en">
+    <body>
+        <form method="post" action="editForm.php">
+            <div class="form-group">
+                <label for="code">Item code for edit</label>
+                <input type="text" class="form-control" name="itemCode" placeholder="Enter item code">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </body>
+</html>
 
-<a href="addItem.php">
-    <button type="button" class="btn btn-success">Add</button>
-</a>
-<a href="editItem.php">
-    <button type="button" class="btn btn-warning">Edit</button>
-</a>
-<a href="deleteItem.php">
-    <button type="button" class="btn btn-danger">Delete</button>
-</a>
