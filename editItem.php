@@ -11,6 +11,7 @@
     $conn = new mysqli($servername, $username, $password, $dbname);
 ?>
 
+<div class="container">
 <table class="table table-striped">                     
     <thead>
         <tr>
@@ -55,6 +56,7 @@
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
+        </div>
     </body>
 </html>
 

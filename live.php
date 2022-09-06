@@ -2,6 +2,8 @@
 	session_start();
   $_SESSION['posted'] = "false";
   include('header.php');
+
+  $link = $_POST["link"];
 ?>
 
 <!doctype html>
@@ -13,7 +15,8 @@
   </head>
   <body>
     <p align="center">
-    <iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2F100083843887168%2Fvideos%2F375779884573268%2F&width=1280" width="1280" height="720" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe>    </p>
+      <?php echo $link; ?>
+    </p>
     <div class="container text-center">
       <div class="row">
         <div class="col border">
