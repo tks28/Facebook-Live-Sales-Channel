@@ -29,7 +29,6 @@
 
     if ($result->num_rows > 0) {
         $counter = 1;
-        // output data of each row
         while($row = $result->fetch_assoc()) {
             echo '<tr>
                     <td scope="row">' . $counter. '</td>

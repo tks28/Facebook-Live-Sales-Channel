@@ -3,6 +3,7 @@
   $_SESSION['posted'] = "false";
   include('header.php');
 
+  $counter = 1;
   $link = $_POST["link"];
 ?>
 
@@ -26,34 +27,27 @@
           Status
         </div>
       </div>
-      <div class="row">
-        <div class="col border">
-          Item A
-        </div>
-        <div class="col border">
-          <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-            <input type="radio" class="btn-check" name="btnradio" id="btnradio1">
-            <label class="btn btn-outline-success" for="btnradio1">Select</label>
-
-            <input type="radio" class="btn-check" name="btnradio" id="btnradio2">
-            <label class="btn btn-outline-danger" for="btnradio2">Remove</label>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col border">
-          Item B
-        </div>
-        <div class="col border">
-        <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-            <input type="radio" class="btn-check" name="btnradio" id="btnradio3">
-            <label class="btn btn-outline-success" for="btnradio3">Select</label>
-
-            <input type="radio" class="btn-check" name="btnradio" id="btnradio4">
-            <label class="btn btn-outline-danger" for="btnradio4">Remove</label>
-          </div>
-        </div>
-      </div>
-    </div>
+      <?php
+         $link = $_POST["link"];
+         if(!empty($_POST["items"])){
+           foreach($_POST["items"] as $item){
+             echo '<div class="row">
+                    <div class="col border">'
+                  .$item.
+                  '</div>
+                  <div class="col border">
+                  <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                    <input type="radio" class="btn-check" name="btnradio" id="btnradio'.$counter.'">
+                    <label class="btn btn-outline-success" for="btnradio'.$counter.'">Select</label>';
+                      $counter = $counter +1;
+                    echo'<input type="radio" class="btn-check" name="btnradio" id="btnradio'.$counter.'">
+                    <label class="btn btn-outline-danger" for="btnradio'.$counter.'">Remove</label>
+                  </div>
+                </div>
+                </div>';
+                $counter = $counter + 1; 
+           }
+         }
+      ?>
   </body>
 </html>
