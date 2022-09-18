@@ -20,6 +20,8 @@
                 <th>Code</th>
                 <th>Price</th>
                 <th>Quantity</th>
+                <th>Edit</th>
+                <th>Delete</th>
             </tr>
         </thead>
         <tbody>
@@ -36,6 +38,22 @@
                     <td> '.$row["code"] .'</td>
                     <td> '.$row["price"] .'</td>
                     <td> '.$row["quantity"] .'</td>
+                    <td>
+                        <form method="post" action="editForm.php">
+                            <div class="form-group">
+                                <input type="hidden" class="form-control" name="itemCode" value="'.$row["code"].'">
+                            </div>
+                            <button type="submit" class="btn btn-warning">Edit</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form method="post" action="deleteForm.php">
+                            <div class="form-group">
+                                <input type="hidden" class="form-control" name="itemCode" value="'.$row["code"].'">
+                            </div>
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </td>
                     </tr>';
             $counter = $counter + 1;
         }
@@ -48,11 +66,5 @@
 
     <a href="addItem.php">
         <button type="button" class="btn btn-success">Add</button>
-    </a>
-    <a href="editItem.php">
-        <button type="button" class="btn btn-warning">Edit</button>
-    </a>
-    <a href="deleteItem.php">
-        <button type="button" class="btn btn-danger">Delete</button>
     </a>
 </div>

@@ -36,7 +36,7 @@
 
     <body>
         <div class="container">
-            <h1>Edit Item for <?php echo $oldCode ?></h1>
+            <h1>Edit Item for <?php echo $code ?></h1>
             <form method="post" action="edit.php">
                 <input name='oldCode' type='hidden' value='<?php echo $oldCode ?>'>
                 <div class="form-group">
