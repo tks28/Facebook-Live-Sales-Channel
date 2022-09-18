@@ -16,7 +16,7 @@
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
                     <a class="nav-link" href="index.php">Dashboard</a>
-                    <a class="nav-link" href="liveForm.php">Live Stream</a>
+                    <a class="nav-link" href="liveSelect.php">Live Stream</a>
                     <a class="nav-link" href="post.php">Post</a>
                     <a class="nav-link" href="inventory.php">Inventory</a>
                 </div>

@@ -4,7 +4,6 @@
     include('header.php');
 
     $counter = 1;
-    $link = $_POST["link"];
 
     $servername = "localhost";
     $username = "root";
@@ -12,6 +11,21 @@
     $dbname = "facebook";
 
     $conn = new mysqli($servername, $username, $password, $dbname);
+
+    $id = $_POST["id"];
+
+    $sql = "SELECT name, items, link FROM live WHERE id='$id'";
+    $result = $conn->query($sql);
+
+    if($result->num_rows > 0){
+        while($row = $result->fetch_assoc()){
+            $name = $row["name"]; 
+            $item = $row["items"];
+            $link = $row["link"];
+        }
+    }
+
+    $items = explode("|", $item);
 ?>
 
 
@@ -44,13 +58,11 @@
                 </div>
             </div>
             <?php
-                $link = $_POST["link"];
-
-                if(!empty($_POST["items"])){
-                    foreach($_POST["items"] as $item){
+                if(!empty($items)){
+                    foreach($items as $object){
                         echo '<div class="row">
                             <div class="col border">'
-                            .$item.
+                            .$object.
                             '</div>
                             <div class="col border">
                             <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
@@ -64,11 +76,10 @@
                             </div>
                             </div>';
 
-                        $sql = "SELECT quantity FROM inventory WHERE name='$item'";
+                        $sql = "SELECT quantity FROM inventory WHERE name='$object'";
                         $result = $conn->query($sql);
                         if ($result->num_rows > 0) {
                             while($row = $result->fetch_assoc()) {
-                                
                                 echo'<div class="col border">'
                                     .$row["quantity"].
                                     '</div>';

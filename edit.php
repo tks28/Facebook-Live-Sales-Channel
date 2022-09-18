@@ -23,6 +23,6 @@
         echo "Error updating record: " . $conn->error;
     }
 
-    //header('Location: index.php');
+    header('Location: inventory.php');
     
 ?>

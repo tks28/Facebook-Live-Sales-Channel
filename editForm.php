@@ -21,9 +21,6 @@
             $oldCode = $row["code"];
         }
     }
-    else{
-        echo "No result found";
-    }
 ?>
 
 <!doctype html>

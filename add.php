@@ -18,6 +18,6 @@
 
     $conn->query($sql);
 
-    header('Location: index.php');
+    header('Location: inventory.php');
     
 ?>
