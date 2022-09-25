@@ -47,7 +47,7 @@
                             <td> '.$row["price"] .'</td>
                             <td> '.$row["quantity"] .'</td>
                             <td>
-                                <form method="post" action="editForm.php">
+                                <form method="post" action="editItemForm.php">
                                     <div class="form-group">
                                         <input type="hidden" class="form-control" name="itemCode" value="'.$row["code"].'">
                                     </div>
@@ -55,7 +55,7 @@
                                 </form>
                             </td>
                             <td>
-                                <form method="post" action="deleteForm.php">
+                                <form method="post" action="deleteItemForm.php">
                                     <div class="form-group">
                                         <input type="hidden" class="form-control" name="itemCode" value="'.$row["code"].'">
                                     </div>

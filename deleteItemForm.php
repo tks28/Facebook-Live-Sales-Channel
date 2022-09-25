@@ -34,11 +34,11 @@
 
     <body>
         <div class="container">
-            <form method="POST" action="delete.php">
+            <form method="POST" action="deleteItem.php">
                 <input type="hidden" name="itemCode" value="<?php echo $code; ?>">
                 <button type="submit" class="btn btn-danger">Yes</button>
             </form>
-            <a href="index.php">
+            <a href="inventory.php">
                 <button type="button" class="btn btn-success">No</button>
             </a>
         </div>

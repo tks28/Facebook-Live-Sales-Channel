@@ -53,7 +53,7 @@
                                     </form>
                                 </td>
                                 <td>
-                                <form method="post" action="editForm.php">
+                                <form method="post" action="editLiveForm.php">
                                     <div class="form-group">
                                         <input type="hidden" class="form-control" name="id" value="'.$row["id"].'">
                                     </div>
@@ -61,7 +61,7 @@
                                 </form>
                                 </td>
                                 <td>
-                                    <form method="post" action="deleteForm.php">
+                                    <form method="post" action="deleteLiveForm.php">
                                         <div class="form-group">
                                             <input type="hidden" class="form-control" name="id" value="'.$row["id"].'">
                                         </div>

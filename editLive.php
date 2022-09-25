@@ -10,14 +10,18 @@
 
     $name = $_POST['liveName']; 
     $items = $_POST['liveItems'];
-    $link = $_POST['liveLink'];
     $item = implode("|", $items);
-   
-    $sql = "INSERT INTO live (name, items, link)
-    VALUES ('$name', '$item', '$link')";
+    $id = $_POST['id'];
 
-    $conn->query($sql);
-    echo "Record sucessful";
+    $sql = "UPDATE live SET name='$name', items='$item'
+    WHERE id='$id'";
+
+    if ($conn->query($sql) === TRUE) {
+        echo "Record updated successfully";
+    } else {
+        echo "Error updating record: " . $conn->error;
+    }
+
     header('Location: liveSelect.php');
     
 ?>

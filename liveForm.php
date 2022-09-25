@@ -17,7 +17,7 @@
         h1, h2 {
             text-align: center;
         }
-    </style>
+    </style>        
     <body>
         <div class="container">
             <h1>Live Stream Setup</h1>
@@ -31,8 +31,8 @@
                     <label for="link">Embed Link</label>
                     <input type="text" class="form-control" name="liveLink" placeholder="Enter Facebook Live Embed Link">
                 </div>
-                <br>
                 <div class="form-group">
+                    <label for="item">Item</label>
                     <select class="form-select" aria-label="Default" name="liveItems[]" multiple>
                         <?php
                             $sql = "SELECT id, name, code, price, quantity FROM inventory";
