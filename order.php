@@ -57,11 +57,20 @@
                 </thead>
             </table>
             <?php
-                echo $comments['comments']['0']['message']. " by " .$comments['comments']['0']['from']['name'];
+                 $counter = 0;
+                    foreach($comments['comments'] as $data){
+                        $temp = $comments['comments'][$counter]['message'];
+                        $message = explode(" ", $temp);
+                        $item = $message['0'];
+                        echo $item;
+                        echo "<br>";
+                        $counter++;
+                    }
+                //echo $comments['comments']['2']['message']. " by " .$comments['comments']['2']['from']['name'];
             ?>
             <br>
             <?php
-                echo $comments['comments']['1']['message']. " by " .$comments['comments']['1']['from']['name'];
+                //echo $comments['comments']['1']['message']. " by " .$comments['comments']['1']['from']['name'];
             ?>
         </div>
     </body>

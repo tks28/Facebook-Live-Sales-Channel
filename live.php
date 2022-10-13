@@ -12,7 +12,13 @@
 
     $conn = new mysqli($servername, $username, $password, $dbname);
 
-    $id = $_POST["id"];
+    if(isset($_SESSION['liveID'])){
+        $id = $_SESSION['liveID'];
+        unset($_SESSION['liveID']); 
+    }
+    else{
+        $id = $_POST["id"];
+    }
 
     $sql = "SELECT name, items, link FROM live WHERE id='$id'";
     $result = $conn->query($sql);
@@ -93,5 +99,11 @@
                     }
                 }
             ?>
+             <form method="post" action="collectOrder.php">
+                <div class="form-group">
+                    <input type="hidden" class="form-control" name="liveID" value="<?php echo $id; ?>">
+                </div>
+                <button type="submit" class="btn btn-success">Edit</button>
+            </form>
     </body>
 </html>
