@@ -9,6 +9,11 @@
     $dbname = "facebook";
 
     $conn = new mysqli($servername, $username, $password, $dbname);
+
+    if(isset($_SESSION['counter'])){
+        $_SESSION['counter'] = 0;
+        unset($_SESSION['itemCode']); 
+    }
 ?>
 
 <!doctype html>

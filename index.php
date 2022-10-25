@@ -10,6 +10,7 @@
 
 	if($_SESSION['posted'] == "true"){
 		echo '<script>alert("Post have been sucessful")</script>';
+        unset($_SESSION['posted']);
 	}
 ?>
 <!DOCTYPE html>

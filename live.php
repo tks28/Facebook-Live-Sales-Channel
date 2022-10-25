@@ -68,20 +68,37 @@
                     foreach($items as $object){
                         echo '<div class="row">
                             <div class="col border">'
-                            .$object.
+                                .$object.
                             '</div>
                             <div class="col border">
-                            <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                            <input type="radio" class="btn-check" name="btnradio" id="btnradio'.$counter.'">
-                            <label class="btn btn-outline-success" for="btnradio'.$counter.'">Select</label>';
-
-                            $counter = $counter +1;
-
-                        echo'<input type="radio" class="btn-check" name="btnradio" id="btnradio'.$counter.'">
-                            <label class="btn btn-outline-danger" for="btnradio'.$counter.'">Remove</label>
-                            </div>
+                                <form method="post" action="itemSelected.php">
+                                    <div class="form-group">';
+                                if(isset($_SESSION['itemCode'])){
+                                    if($_SESSION['itemCode'] == $object){
+                                        echo'<input type="hidden" class="form-control" name="itemCode" value="'.$object.'">
+                                            <input type="hidden" class="form-control" name="liveID" value="'. $id.'">
+                                    </div>
+                                    <button type="submit" class="btn btn-success" disabled>Selected</button>
+                                </form>
                             </div>';
-
+                                    }
+                                    else{
+                                        echo'<input type="hidden" class="form-control" name="itemCode" value="'.$object.'">
+                                        <input type="hidden" class="form-control" name="liveID" value="'. $id.'">
+                                    </div>
+                                    <button type="submit" class="btn btn-success">Select</button>
+                                </form>
+                            </div>';
+                                    }
+                                }
+                                else{
+                                    echo'<input type="hidden" class="form-control" name="itemCode" value="'.$object.'">
+                                    <input type="hidden" class="form-control" name="liveID" value="'. $id.'">
+                                </div>
+                                <button type="submit" class="btn btn-success">Select</button>
+                            </form>
+                        </div>';
+                                }
                         $sql = "SELECT quantity FROM inventory WHERE name='$object'";
                         $result = $conn->query($sql);
                         if ($result->num_rows > 0) {
@@ -104,6 +121,12 @@
                     <input type="hidden" class="form-control" name="liveID" value="<?php echo $id; ?>">
                 </div>
                 <button type="submit" class="btn btn-success">Get Order</button>
+            </form>
+            <form method="post" action="itemSelected.php">
+                <div class="form-group">
+                    <input type="hidden" class="form-control" name="liveID" value="<?php echo $id; ?>">
+                </div>
+                <button type="submit" class="btn btn-danger">Remove Item</button>
             </form>
     </body>
 </html>

@@ -11,6 +11,8 @@
     $live = $_POST['liveID'];
     $_SESSION['liveID'] = $live;
 
+    $itemSelected = $_SESSION['itemCode'];
+
     $sql = "SELECT items FROM live WHERE id='$live'";
     $result = $conn->query($sql);
 
@@ -40,10 +42,15 @@
     $response = $FBObject->get("/$liveID?fields=comments", $pageAcessToken);
     $comments = $response->getGraphNode()->asArray();
     
-    $counter = 0;
+    if(empty($_SESSION['counter'])){
+         $_SESSION['counter'] = 0;
+    }
+
+    $len = count($comments['comments']);
+
     if(!empty($comments)){
-        foreach($comments['comments'] as $data){
-            $temp = $comments['comments'][$counter]['message'];
+        while($_SESSION['counter'] < $len){
+            $temp = $comments['comments'][$_SESSION['counter']]['message'];
             $message = explode(" ", $temp);
             $item = $message['0'];
 
@@ -55,9 +62,9 @@
                 }
             }
 
-            if(in_array($name, $itemArray)){
-                $fbID = $comments['comments'][$counter]['from']['id'];
-                $fbName = $comments['comments'][$counter]['from']['name'];
+            if(in_array($name, $itemArray) && $name == $itemSelected){
+                $fbID = $comments['comments'][$_SESSION['counter']]['from']['id'];
+                $fbName = $comments['comments'][$_SESSION['counter']]['from']['name'];
     
                 $num = $message['1'];
                 ltrim($num, $num['0']);
@@ -70,11 +77,12 @@
                         $price = $row["price"] * $quantity;
                     }
                 } 
-                echo "success".$counter."";
-    
+                echo $_SESSION['counter'];
+
                 $sql = "INSERT INTO orders (fbID, fbName, item, price, live, quantity)
                 VALUES ('$fbID', '$fbName', '$item', '$price', '$live', '$quantity')";
-    
+                
+
                 if ($conn->query($sql) === TRUE) {
                     echo "New record created successfully";
                 } else {
@@ -85,7 +93,7 @@
             else{
 
             }
-            $counter++;
+            $_SESSION['counter']++;
         }
     }
 
