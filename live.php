@@ -103,7 +103,7 @@
                 <div class="form-group">
                     <input type="hidden" class="form-control" name="liveID" value="<?php echo $id; ?>">
                 </div>
-                <button type="submit" class="btn btn-success">Edit</button>
+                <button type="submit" class="btn btn-success">Get Order</button>
             </form>
     </body>
 </html>

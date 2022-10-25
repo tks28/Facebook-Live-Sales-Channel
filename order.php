@@ -9,30 +9,6 @@
     $dbname = "facebook";
 
     $conn = new mysqli($servername, $username, $password, $dbname);
-
-
-
-    $facebookID = $_SESSION['userData']['id'];
-    $response = $FBObject->get("/$facebookID?fields=accounts", $_SESSION['access_token']);
-    $pageData = $response->getGraphNode()->asArray();
-    $_SESSION['pageData'] = $pageData;
-
-    $pageID = $_SESSION['pageData']['accounts']['0']['id'];
-
-    $response = $FBObject->get("/$pageID?fields=live_videos", $_SESSION['access_token']);
-    $liveData = $response->getGraphNode()->asArray();
-    
-    $liveID = $liveData['live_videos']['0']['id'];
-
-    $response = $FBObject->get("/$pageID?fields=access_token", $_SESSION['access_token']);
-    $accessT = $response->getGraphNode()->asArray();
-    $pageAcessToken = $accessT['access_token'];
-
-    $response = $FBObject->get("/$liveID?fields=comments", $pageAcessToken);
-    $comments = $response->getGraphNode()->asArray();
-
-
-
     ?>
 
 <!doctype html>
@@ -50,28 +26,36 @@
                     <tr>
                         <th>#</th>
                         <th>Customer Name</th>
-                        <th>Order ID</th>
+                        <th>Live ID</th>
+                        <th>Item</th>
                         <th>Price</th>
                         <th>Quantity</th>
                     </tr>
                 </thead>
+                <tbody>
+                <?php
+                    $sql = "SELECT id, fbID, fbName, item, price, live, quantity FROM orders";
+                    $result = $conn->query($sql);
+
+                    if ($result->num_rows > 0) {
+                        $counter = 1;
+                        while($row = $result->fetch_assoc()) {
+                            echo '<tr>
+                                    <td scope="row">' . $counter. '</td>
+                                    <td>' . $row["fbName"] .'</td>
+                                    <td> '.$row["live"] .'</td>
+                                    <td> '.$row["item"] .'</td>
+                                    <td> '.$row["price"] .'</td>
+                                    <td> '.$row["quantity"] .'</td>
+                                </tr>';
+                            $counter = $counter + 1;
+                        }
+                    } else {
+                        echo "0 results";
+                    } 
+                ?>
+                </tbody>
             </table>
-            <?php
-                 $counter = 0;
-                    foreach($comments['comments'] as $data){
-                        $temp = $comments['comments'][$counter]['message'];
-                        $message = explode(" ", $temp);
-                        $item = $message['0'];
-                        echo $item;
-                        echo "<br>";
-                        $counter++;
-                    }
-                //echo $comments['comments']['2']['message']. " by " .$comments['comments']['2']['from']['name'];
-            ?>
-            <br>
-            <?php
-                //echo $comments['comments']['1']['message']. " by " .$comments['comments']['1']['from']['name'];
-            ?>
         </div>
     </body>
 </html>

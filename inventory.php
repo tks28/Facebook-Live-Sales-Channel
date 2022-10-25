@@ -33,42 +33,42 @@
                     </tr>
                 </thead>
                 <tbody>
-        <?php
-            $sql = "SELECT id, name, code, price, quantity FROM inventory";
-            $result = $conn->query($sql);
+                <?php
+                    $sql = "SELECT id, name, code, price, quantity FROM inventory";
+                    $result = $conn->query($sql);
 
-            if ($result->num_rows > 0) {
-                $counter = 1;
-                while($row = $result->fetch_assoc()) {
-                    echo '<tr>
-                            <td scope="row">' . $counter. '</td>
-                            <td>' . $row["name"] .'</td>
-                            <td> '.$row["code"] .'</td>
-                            <td> '.$row["price"] .'</td>
-                            <td> '.$row["quantity"] .'</td>
-                            <td>
-                                <form method="post" action="editItemForm.php">
-                                    <div class="form-group">
-                                        <input type="hidden" class="form-control" name="itemCode" value="'.$row["code"].'">
-                                    </div>
-                                    <button type="submit" class="btn btn-warning">Edit</button>
-                                </form>
-                            </td>
-                            <td>
-                                <form method="post" action="deleteItemForm.php">
-                                    <div class="form-group">
-                                        <input type="hidden" class="form-control" name="itemCode" value="'.$row["code"].'">
-                                    </div>
-                                    <button type="submit" class="btn btn-danger">Delete</button>
-                                </form>
-                            </td>
-                            </tr>';
-                    $counter = $counter + 1;
-                }
-            } else {
-                echo "0 results";
-            } 
-        ?>
+                    if ($result->num_rows > 0) {
+                        $counter = 1;
+                        while($row = $result->fetch_assoc()) {
+                            echo '<tr>
+                                    <td scope="row">' . $counter. '</td>
+                                    <td>' . $row["name"] .'</td>
+                                    <td> '.$row["code"] .'</td>
+                                    <td> '.$row["price"] .'</td>
+                                    <td> '.$row["quantity"] .'</td>
+                                    <td>
+                                        <form method="post" action="editItemForm.php">
+                                            <div class="form-group">
+                                                <input type="hidden" class="form-control" name="itemCode" value="'.$row["code"].'">
+                                            </div>
+                                            <button type="submit" class="btn btn-warning">Edit</button>
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <form method="post" action="deleteItemForm.php">
+                                            <div class="form-group">
+                                                <input type="hidden" class="form-control" name="itemCode" value="'.$row["code"].'">
+                                            </div>
+                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                        </form>
+                                    </td>
+                                    </tr>';
+                            $counter = $counter + 1;
+                        }
+                    } else {
+                        echo "0 results";
+                    } 
+                ?>
                 </tbody>
             </table>
 
