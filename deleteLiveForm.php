@@ -36,7 +36,7 @@
     </style>
 
     <body>
-        <div class="container">
+        <div class="container" style="margin-top: 50px">
             <form method="POST" action="deleteLive.php">
                 <input type="hidden" name="id" value="<?php echo $id; ?>">
                 <button type="submit" class="btn btn-danger">Yes</button>

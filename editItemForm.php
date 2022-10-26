@@ -32,7 +32,7 @@
     </style>
 
     <body>
-        <div class="container">
+        <div class="container" style="margin-top: 50px">
             <h1>Edit Item for <?php echo $code ?></h1>
             <form method="post" action="editItem.php">
                 <input name='oldCode' type='hidden' value='<?php echo $oldCode ?>'>

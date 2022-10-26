@@ -24,7 +24,7 @@
         }
     </style>
     <body>
-        <div class="container">
+        <div class="container" style="margin-top: 50px">
             <h1>Live Stream</h1>
             <table class="table table-striped">                     
                 <thead>

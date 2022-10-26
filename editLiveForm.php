@@ -32,7 +32,7 @@
     </style>
 
     <body>
-        <div class="container">
+        <div class="container" style="margin-top: 50px">
             <h1>Edit Live for <?php echo $name ?></h1>
             <form method="post" action="editLive.php">
                 <input name='id' type='hidden' value='<?php echo $id ?>'>

@@ -44,7 +44,7 @@
     </head>
 
     <body>
-        <p align="center">
+        <p align="center" style="margin-top: 50px">
             <?php echo $link; ?>
         </p>
 
