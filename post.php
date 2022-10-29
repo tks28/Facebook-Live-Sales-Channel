@@ -29,6 +29,8 @@
         </form>
     </div>
     
+    
+    
 <?php
     }catch(Facebook\Exceptions\FacebookSDKException $e){
         echo $e->getMessage();

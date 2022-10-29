@@ -26,15 +26,16 @@
                     <tr>
                         <th>#</th>
                         <th>Customer Name</th>
+                        <th>Date (Y/M/D)</th>
                         <th>Live ID</th>
                         <th>Item</th>
-                        <th>Price</th>
+                        <th>Price (RM)</th>
                         <th>Quantity</th>
                     </tr>
                 </thead>
                 <tbody>
                 <?php
-                    $sql = "SELECT id, fbID, fbName, item, price, live, quantity FROM orders";
+                    $sql = "SELECT * FROM orders";
                     $result = $conn->query($sql);
 
                     if ($result->num_rows > 0) {
@@ -43,6 +44,7 @@
                             echo '<tr>
                                     <td scope="row">' . $counter. '</td>
                                     <td>' . $row["fbName"] .'</td>
+                                    <td>' . $row["date"]. '</td>
                                     <td> '.$row["live"] .'</td>
                                     <td> '.$row["item"] .'</td>
                                     <td> '.$row["price"] .'</td>

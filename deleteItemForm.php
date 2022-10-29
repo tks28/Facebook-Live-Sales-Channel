@@ -12,13 +12,6 @@
 
     $sql = "SELECT code FROM inventory WHERE code='$code'";
     $result = $conn->query($sql);
-
-    if($result->num_rows > 0){
-        echo "<h1>Are you sure you want to delete Item Code $code</h1>";
-    }
-    else{
-        echo "No result found";
-    }
 ?>
 
 <!doctype html>
@@ -34,13 +27,29 @@
 
     <body>
         <div class="container" style="margin-top: 50px">
-            <form method="POST" action="deleteItem.php">
-                <input type="hidden" name="itemCode" value="<?php echo $code; ?>">
-                <button type="submit" class="btn btn-danger">Yes</button>
-            </form>
-            <a href="inventory.php">
-                <button type="button" class="btn btn-success">No</button>
-            </a>
+            <?php
+                if($result->num_rows > 0){
+                    echo "<h1>Are you sure you want to delete Item Code $code</h1>";
+                }
+                else{
+                    echo "No result found";
+                }
+            ?>
+            <table class="table table-borderless">
+                <tbody>
+                    <tr>
+                    <form method="POST" action="deleteItem.php">
+                        <input type="hidden" name="itemCode" value="<?php echo $code; ?>">
+                        <button type="submit" class="btn btn-danger">Yes</button>
+                    </form>
+                    </tr>
+                    <tr>
+                    <a href="inventory.php">
+                        <button type="button" class="btn btn-success">No</button>
+                    </a>
+                    </tr>
+                </tbody>
+            </table> 
         </div>
     </body>
 </html>

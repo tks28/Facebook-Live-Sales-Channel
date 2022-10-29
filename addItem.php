@@ -7,7 +7,8 @@
 <!doctype html>
 <html lang="en">
     <body>
-        <div class="container">
+        <div class="container" style="margin-top: 50px">
+            <h1 style="text-align:center">Add New Item</h1>
             <form method="post" action="add.php">
                 <div class="form-group">
                     <label for="name">Item name</label>

@@ -47,6 +47,7 @@
     }
 
     $len = count($comments['comments']);
+    $date = date("Y/m/d");
 
     if(!empty($comments)){
         while($_SESSION['counter'] < $len){
@@ -79,8 +80,8 @@
                 } 
                 echo $_SESSION['counter'];
 
-                $sql = "INSERT INTO orders (fbID, fbName, item, price, live, quantity)
-                VALUES ('$fbID', '$fbName', '$item', '$price', '$live', '$quantity')";
+                $sql = "INSERT INTO orders (fbID, fbName, item, price, live, quantity, date)
+                VALUES ('$fbID', '$fbName', '$item', '$price', '$live', '$quantity', '$date')";
                 
 
                 if ($conn->query($sql) === TRUE) {

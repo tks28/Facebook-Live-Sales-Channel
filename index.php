@@ -13,6 +13,12 @@
         unset($_SESSION['posted']);
 	}
 
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "facebook";
+    $conn = new mysqli($servername, $username, $password, $dbname);
+
     $dataPoints = array(
         array("x"=> 10, "y"=> 41),
         array("x"=> 20, "y"=> 35),
@@ -28,6 +34,36 @@
         array("x"=> 120, "y"=> 49),
         array("x"=> 130, "y"=> 41)
     );
+
+    $month = date("m");
+    $day = date("d");
+    $monthlySale = "0";
+    $dailySale =  "0";
+    $monthlyOrder = "0";
+
+    $sql = "SELECT price FROM orders WHERE MONTH(date) = $month";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            $monthlySale = $monthlySale + $row["price"];
+            $monthlyOrder++;
+        }
+    } else {
+        $monthlySale = "0";
+        $monthlyOrder = "0";
+    }
+    
+    $sql = "SELECT price FROM orders WHERE DAY(date) = $day";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            $dailySale = $dailySale + $row["price"];
+        }
+    } else {
+        $dailySale = "0";
+    } 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -76,8 +112,22 @@
                     <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
                         <div class="card-header">Monthly Sale</div>
                         <div class="card-body">
-                            <h5 class="card-title">Primary card title</h5>
-                            <a href="#" class="btn btn-danger">See More</a>
+                            <h5 class="card-title">RM<?php echo $monthlySale; ?></h5>
+                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#monthlySaleModal">See More</button>
+
+                            <div class="modal fade" id="monthlySaleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-lg text-black">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Monthly Sale</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                        
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -85,7 +135,7 @@
                     <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
                         <div class="card-header">Monthly Order</div>
                         <div class="card-body">
-                            <h5 class="card-title">Primary card title</h5>
+                            <h5 class="card-title"><?php echo $monthlyOrder ?></h5>
                             <a href="#" class="btn btn-danger">See More</a>
                         </div>
                     </div>
@@ -94,7 +144,7 @@
                     <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
                         <div class="card-header">Daily Sale</div>
                         <div class="card-body">
-                            <h5 class="card-title">Primary card title</h5>
+                            <h5 class="card-title">RM<?php echo $dailySale; ?></h5>
                             <a href="#" class="btn btn-danger">See More</a>
                         </div>
                     </div>
