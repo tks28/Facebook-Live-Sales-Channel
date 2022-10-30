@@ -19,21 +19,39 @@
     $dbname = "facebook";
     $conn = new mysqli($servername, $username, $password, $dbname);
 
-    $dataPoints = array(
-        array("x"=> 10, "y"=> 41),
-        array("x"=> 20, "y"=> 35),
-        array("x"=> 30, "y"=> 50),
-        array("x"=> 40, "y"=> 45),
-        array("x"=> 50, "y"=> 52),
-        array("x"=> 60, "y"=> 68),
-        array("x"=> 70, "y"=> 38),
-        array("x"=> 80, "y"=> 71),
-        array("x"=> 90, "y"=> 52),
-        array("x"=> 100, "y"=> 60),
-        array("x"=> 110, "y"=> 36),
-        array("x"=> 120, "y"=> 49),
-        array("x"=> 130, "y"=> 41)
-    );
+    $itemName = array();
+    $itemPrice = array();
+    $dataPoints = array();
+
+    $sql = "SELECT code FROM inventory";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            array_push($itemName, $row["code"]);
+        }
+    }
+
+    foreach($itemName as $item){
+        $price = 0;
+        $sql = "SELECT item, price FROM orders";
+        $result = $conn->query($sql);
+    
+        if ($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()) {
+                if($row["item"] == $item){
+                    $price = $price + $row["price"];
+                }
+            }
+        }
+        array_push($itemPrice, $price);
+    }
+
+    $counter = 0;
+    while($counter < count($itemName)){
+        array_push($dataPoints, array("label"=> $itemName[$counter], "y"=>$itemPrice[$counter]));
+        $counter++;
+    }
 
     $month = date("m");
     $day = date("d");
@@ -113,21 +131,7 @@
                         <div class="card-header">Monthly Sale</div>
                         <div class="card-body">
                             <h5 class="card-title">RM<?php echo $monthlySale; ?></h5>
-                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#monthlySaleModal">See More</button>
-
-                            <div class="modal fade" id="monthlySaleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-lg text-black">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Monthly Sale</h1>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                        
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <a href="monthlySale.php" class="btn btn-danger">See More</a>
                         </div>
                     </div>
                 </div>
@@ -136,7 +140,7 @@
                         <div class="card-header">Monthly Order</div>
                         <div class="card-body">
                             <h5 class="card-title"><?php echo $monthlyOrder ?></h5>
-                            <a href="#" class="btn btn-danger">See More</a>
+                            <a href="monthlyOrder.php" class="btn btn-danger">See More</a>
                         </div>
                     </div>
                 </div>
@@ -145,7 +149,7 @@
                         <div class="card-header">Daily Sale</div>
                         <div class="card-body">
                             <h5 class="card-title">RM<?php echo $dailySale; ?></h5>
-                            <a href="#" class="btn btn-danger">See More</a>
+                            <a href="dailySale.php" class="btn btn-danger">See More</a>
                         </div>
                     </div>
                 </div>

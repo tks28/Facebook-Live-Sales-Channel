@@ -38,15 +38,15 @@
             <table class="table table-borderless">
                 <tbody>
                     <tr>
-                    <form method="POST" action="deleteItem.php">
-                        <input type="hidden" name="itemCode" value="<?php echo $code; ?>">
-                        <button type="submit" class="btn btn-danger">Yes</button>
-                    </form>
+                        <form method="POST" action="deleteItem.php">
+                            <input type="hidden" name="itemCode" value="<?php echo $code; ?>">
+                            <button type="submit" class="btn btn-danger">Yes</button>
+                        </form>
                     </tr>
                     <tr>
-                    <a href="inventory.php">
-                        <button type="button" class="btn btn-success">No</button>
-                    </a>
+                        <a href="inventory.php">
+                            <button type="button" class="btn btn-success">No</button>
+                        </a>
                     </tr>
                 </tbody>
             </table> 

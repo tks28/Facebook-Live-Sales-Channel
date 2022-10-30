@@ -19,7 +19,7 @@
         }
     </style>        
     <body>
-        <div class="container">
+        <div class="container" style="margin-top: 50px">
             <h1>Live Stream Setup</h1>
             <h2>Please enter the Facebook Live embed link</h2>
             <form method="post" action="addLive.php">
