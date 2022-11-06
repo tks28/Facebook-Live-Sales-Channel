@@ -14,6 +14,10 @@
         $_SESSION['counter'] = 0;
         unset($_SESSION['itemCode']); 
     }
+
+    if(isset($_SESSION['itemCount'])){
+        unset($_SESSION['itemCount']); 
+    }
 ?>
 
 <!doctype html>

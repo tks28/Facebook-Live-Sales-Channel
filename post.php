@@ -18,11 +18,20 @@
             }
 
 ?>
-    <div class="container">
-        <form method="post" action="page.php">
-            <div class="form-group col-md-6">
-                <label for="message">Post to Facebook</label>
-                <textarea type="text" class="form-control" name="message" placeholder="Enter Message" rows="3"></textarea>
+     <style>
+        h1, h2, form {
+            text-align: center;
+        }
+    </style>
+    <script src="validation.js"></script>
+
+
+    <div class="container" style="margin-top: 50px">
+        <h1>Post to Facebook Page</h1>
+        <form method="post" action="page.php" class="needs-validation"  novalidate="">
+            <div class="form-group">
+                <textarea type="text" class="form-control" name="message" placeholder="Enter Message" rows="3" required></textarea>
+                <div class="invalid-feedback"> Please enter a message. </div>
             </div>
             </br>
             <button type="submit" class="btn btn-primary">Submit</button>

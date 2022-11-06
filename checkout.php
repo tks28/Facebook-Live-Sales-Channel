@@ -35,24 +35,7 @@
                 <a class="navbar-brand" href="#">ETCM</a>
             </div>
         </nav>
-        <script>
-            (function () {
-                window.addEventListener('load', function () {
-                    var forms = document.getElementsByClassName('needs-validation')
-
-                    Array.prototype.filter.call(forms, function (form) {
-                    form.addEventListener('submit', function (event) {
-                        if (form.checkValidity() === false) {
-                        event.preventDefault()
-                        event.stopPropagation()
-                        } 
-
-                        form.classList.add('was-validated')
-                    }, false)
-                    })
-                }, false)
-                }())
-        </script>
+        <script src="validation.js"></script>
         <div class="container">
             <div class="py-5 text-center">
                 <h2>Checkout form</h2>
@@ -200,9 +183,7 @@
                             </div>
                         </div>
                         <hr class="mb-4">
-                        <a href="index.php">
-                            <button class="btn btn-primary btn-lg btn-block" type="submit" href="index.php">Continue to checkout</button>
-                        </a>
+                        <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
                         <!-- <a href="index.php" class="btn btn-primary btn-lg btn-block" type="submit" role="button">Continue to checkout</a> -->
                     </form>
                 </div>

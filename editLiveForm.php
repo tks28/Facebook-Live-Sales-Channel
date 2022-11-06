@@ -30,19 +30,21 @@
             text-align: center;
         }
     </style>
+    <script src="validation.js"></script>
 
     <body>
         <div class="container" style="margin-top: 50px">
             <h1>Edit Live for <?php echo $name ?></h1>
-            <form method="post" action="editLive.php">
+            <form method="post" action="editLive.php" class="needs-validation"  novalidate="">
                 <input name='id' type='hidden' value='<?php echo $id ?>'>
                 <div class="form-group">
                     <label for="name">Live Name</label>
-                    <input type="text" class="form-control" name="liveName" placeholder="Enter Facebook Live Name" value="<?php echo $name ?>">
+                    <input type="text" class="form-control" name="liveName" placeholder="Enter Facebook Live Name" value="<?php echo $name ?>" required>
+                    <div class="invalid-feedback"> Valid name is required. </div>
                 </div>
                 <div class="form-group">
                     <label for="item">Item</label>
-                    <select class="form-select" aria-label="Default" name="liveItems[]" multiple>
+                    <select class="form-select" aria-label="Default" name="liveItems[]" multiple required>
                         <?php
                             $sql = "SELECT id, name, code, price, quantity FROM inventory";
                             $result = $conn->query($sql);
@@ -61,6 +63,7 @@
                             } 
                         ?>
                     </select>
+                    <div class="invalid-feedback"> Please select at least one item. </div>
                 </div>
                 <button type="submit" class="btn btn-primary">Edit</button>
             </form>

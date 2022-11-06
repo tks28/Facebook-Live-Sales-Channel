@@ -10,7 +10,7 @@
 
     $live = $_POST['liveID'];
     $_SESSION['liveID'] = $live;
-
+    
     $itemSelected = $_SESSION['itemCode'];
 
     $sql = "SELECT items FROM live WHERE id='$live'";
@@ -80,15 +80,42 @@
                 } 
                 echo $_SESSION['counter'];
 
-                $sql = "INSERT INTO orders (fbID, fbName, item, price, live, quantity, date)
-                VALUES ('$fbID', '$fbName', '$item', '$price', '$live', '$quantity', '$date')";
-                
+                $sql = "SELECT * FROM orders WHERE fbID='$fbID' AND item='$item' AND live='$live'";
+                $result = $conn->query($sql);
+                if ($result->num_rows > 0) {
+                    while($row = $result->fetch_assoc()) {
+                        $oldQuantity = $row['quantity'];
+                        $sql = "UPDATE orders SET quantity='$quantity' price='$price' WHERE fbID='$fbID' AND item='$item' AND live='$live'";                 
+                        
+                        if ($conn->query($sql) === TRUE) {
+                            echo "New record created successfully";
+                        } else {
+                            echo "Error: " . $sql . "<br>" . $conn->error;
+                        }
+                        
+                        $sql = "UPDATE inventory SET quantity = quantity - '$quantity' + '$oldQuantity' WHERE code = '$item'";
+                        $conn->query($sql);
 
-                if ($conn->query($sql) === TRUE) {
-                    echo "New record created successfully";
-                } else {
-                    echo "Error: " . $sql . "<br>" . $conn->error;
+                        $_SESSION['itemCount'][$item] = $_SESSION['itemCount'][$item] - $oldQuantity + $quantity;
+                    }
                 }
+                else{
+                    $sql = "INSERT INTO orders (fbID, fbName, item, price, live, quantity, date)
+                    VALUES ('$fbID', '$fbName', '$item', '$price', '$live', '$quantity', '$date')";
+                    
+    
+                    if ($conn->query($sql) === TRUE) {
+                        echo "New record created successfully";
+                    } else {
+                        echo "Error: " . $sql . "<br>" . $conn->error;
+                    }
+
+                    $sql = "UPDATE inventory SET quantity = quantity - '$quantity' WHERE code = '$item'";
+                    $conn->query($sql);
+
+                    $_SESSION['itemCount'][$item] = $quantity;
+                } 
+
                 $name = "";
             }
             else{
@@ -98,6 +125,6 @@
         }
     }
 
-    header('Location: live.php');
+    //header('Location: live.php');
     
 ?>

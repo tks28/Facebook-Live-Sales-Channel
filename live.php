@@ -60,7 +60,7 @@
                     Item Quantity
                 </div>
                 <div class="col border">
-                    Current Stock Count
+                    Current Sold Quantity
                 </div>
             </div>
             <?php
@@ -99,16 +99,28 @@
                             </form>
                         </div>';
                                 }
-                        $sql = "SELECT quantity FROM inventory WHERE name='$object'";
+                        $sql = "SELECT code, quantity FROM inventory WHERE name='$object'";
                         $result = $conn->query($sql);
                         if ($result->num_rows > 0) {
                             while($row = $result->fetch_assoc()) {
                                 echo'<div class="col border">'
                                     .$row["quantity"].
                                     '</div>';
-                                echo'<div class="col border">'
-                                    .$row["quantity"].
-                                    '</div>';
+                                echo'<div class="col border">';
+                                    if(isset($_SESSION['itemCount'])){
+                                        if(empty($_SESSION['itemCount'][$row['code']])){
+                                            $_SESSION['itemCount'][$row['code']] = 0;
+                                            echo $_SESSION['itemCount'][$row['code']];
+                                        }
+                                        else{
+                                            echo $_SESSION['itemCount'][$row['code']];
+                                        }
+                                    }
+                                    else{
+                                        $_SESSION['itemCount'][$row['code']] = 0;
+                                        echo $_SESSION['itemCount'][$row['code']];
+                                    }
+                                echo '</div>';
                             }
                         } 
                         echo'</div>';

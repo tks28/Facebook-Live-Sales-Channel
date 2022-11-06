@@ -18,6 +18,6 @@
         echo "Error updating record: " . $conn->error;
     }
 
-    header('Location: inventory.php');
+    header('Location: liveSelect.php');
     
 ?>

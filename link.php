@@ -13,7 +13,6 @@
 
     $pageID = $_SESSION['pageData']['accounts']['0']['id'];
 
-
     $response = $FBObject->get("/$pageID?fields=access_token", $_SESSION['access_token']);
     $accessT = $response->getGraphNode()->asArray();
     $pageAcessToken = $accessT['access_token'];
@@ -25,6 +24,7 @@
     $senderID = $senders['conversations']['0']['senders']['0']['id'];
     $senderName = $senders['conversations']['0']['senders']['0']['name'];
 
+
     $sql = "SELECT fbID, fbName FROM orders WHERE live='$liveID'";
     $result = $conn->query($sql);
 
@@ -34,24 +34,12 @@
                 $array = array("messaging_type"=>"RESPONSE", "recipient"=>"{'id':'$senderID'}");
                 $url = urlencode("http://localhost/Test/checkout.php?fbID=$row[fbID]&liveID=$liveID");
 
-                $response = $FBObject->post("/$pageID/messages?message={'text':'$url'}", $array, $pageAcessToken);
-
+                $response = $FBObject->post("/$pageID/messages?message={'text':'Hello $row[fbName] this is the checkout link $url'}", $array, $pageAcessToken);
                 array_push($sent, $row['fbName']);
             }
         }
     }
 
-    // $array = array("messaging_type"=>"RESPONSE", "recipient"=>"{'id':'$senderID'}");
-    // $url = urlencode("http://localhost/Test/checkout.php?fbID=103316739133105&liveID=1");
-
-    // $response = $FBObject->post("/$pageID/messages?message={'text':'$url'}", $array, $pageAcessToken);
-
-
-
-    
-
-  
-
-    //header('Location: live.php');
+    header('Location: index.php');
     
 ?>
