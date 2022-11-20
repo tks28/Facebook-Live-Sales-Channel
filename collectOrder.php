@@ -125,6 +125,6 @@
         }
     }
 
-    //header('Location: live.php');
+    header('Location: live.php');
     
 ?>
